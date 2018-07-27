@@ -1,0 +1,192 @@
+/* general */
+
+::placeholder{
+  color:#999;
+  opacity:1;
+}
+
+.avatar{
+  width:80px;
+  float:left;
+  text-align:center;
+  font-size:32px;
+}
+
+.rightbar{
+  padding:1em;
+  background-color:#36393e;
+  color:rgba(255,255,255,0.7);
+}
+
+.leftbar{
+  width:30%;
+  float:left;
+  background-color:#2f3136;
+}
+
+.rightbar{
+  width:30%;
+  float:left;
+}
+
+.tooltip{
+  position:absolute;
+  display:block;
+  left:-5000px;
+  background-color:#000;
+  border-radius:5px;
+  padding:5px 10px;
+  width:10em;
+}
+
+.has-tooltip{
+  position:relative;
+}
+
+.has-tooltip:hover .tooltip{
+  left: -5em;
+  top: -2.5em;
+}
+
+.tooltip:after{
+  width: 0;
+  border-left:0;
+}
+
+/* Account Bar */
+
+.account-bar{
+  background:rgba(32,34,37,.3);
+  padding:10px;
+  color:#fff;
+  position:relative;
+}
+
+.account-bar .settings{
+  position:absolute;
+  right:0;
+  top:0;
+}
+
+.account-bar .settings .user-tool-icon{
+  display:inline-block;
+  padding:1em;
+  color:#999;
+}
+
+.account-bar .user-tool-icon:hover{
+  color:#fff;
+}
+
+.account-bar .settings .tooltip{
+  color:#fff;
+}
+
+.account-bar:after{
+  content:'';
+  display:table;
+  clear:both;
+}
+
+.user-name{
+  font-weight:600;
+  padding:0 10px;
+  color:#fff;
+  display: inline-block;
+}
+
+.user-id{
+  font-size:0.8em;
+  color:#999;
+  padding-left:90px;
+}
+
+/* channels */
+
+.channels h1{
+  color:#72767d;
+  text-transform:uppercase;
+  font-size:1em;
+}
+
+.channels{
+  padding:2em;
+}
+
+.channel{
+  display:block;
+  padding:10px;
+  color:#dcddde;
+  text-decoration:none;
+}
+
+.channel[data-current = true]{
+  background-color:#666;
+  border-radius:5px;
+}
+
+/* cards */
+
+.card{
+  border-bottom: 1px solid #666;
+  padding:1em 0 0 0;
+  position:relative;
+}
+
+.message{
+  padding-left:90px;
+}
+
+.message-date{
+  display: inline-block;
+  font-size:0.8em;
+  color:#999;
+}
+
+.icon-delete{
+  display:block;
+  position:absolute;
+  top:0.5em;
+  right:0.5em;
+  color:#999;
+}
+.icon-delete:hover{
+  color:#fff;
+}
+
+/* add message */
+
+.message-box{
+  background-color:#666;
+  border-radius:8px;
+  margin: 1em 0;
+  padding:0.5em 0 0.5em 1em;
+}
+
+.message-box input{
+  border:none;
+  font-size:1em;
+  background-color:transparent;
+  padding:0;
+  width: calc(100% - 3em);
+  color:#fff;
+}
+
+.message-box button{
+  background-color:transparent;
+  border:none;
+  font-size:1.5em;
+  text-align:center;
+  
+}
+.message-box button i{
+  vertical-align:middle;
+}
+
+.message-box button:hover{
+  color:#fff;
+}
+
+
+
+
