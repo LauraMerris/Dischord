@@ -15,26 +15,37 @@ const rootReducer = combineReducers({
 export default rootReducer;
 
 /* selectors */
+/* was using this to denormalize before filtering, but now filtering and then denormalizing*/
 
-const getMessages = ({messages, users, channels}) => {
-    
+//const getMessages = ({messages, users, channels}) => {
+
     /* converts messages hashtable into array of message objects */
-    const allMessages = Object.keys(messages).map(id => messages[id]);
+//    const allMessages = Object.keys(messages).map(id => messages[id]);
 
     /* denormalize child objects 'user' and 'channel' for each message */
-    const newMessages = allMessages.map(message => ({
+//    const newMessages = allMessages.map(message => ({
+//        ...message, 
+//        user: users[message.user],
+//        channel: channels[message.channel]
+//    }))
+
+//    return newMessages;
+
+//}
+
+
+const denormalizeMessages = ({users, channels}, messages) => (
+    messages.map(message => ({
         ...message, 
         user: users[message.user],
         channel: channels[message.channel]
     }))
+)
 
-    return newMessages;
-
-}
-
-export const filterMessagesByChannel = (state, channel) => (
-    fromMessages.filterMessagesByChannel(getMessages(state), channel)
-);
+export const filterMessagesByChannel = (state, channel) => {
+    const filtered = fromMessages.filterMessagesByChannel(state.messages, channel);
+    return denormalizeMessages(state, filtered);
+};
 
 export const getChannels = (state) => (
     fromChannels.getChannels(state.channels)

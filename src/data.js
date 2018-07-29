@@ -2,28 +2,27 @@ const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 // simulates REST API calls
 
-export const getMessages = () => (
+export const getChannelsData = () => (
+  delay(500).then(() => {
+    return fakeDatabase.channels
+  })
+);
+
+export const getMessages = (channel) => (
   delay(500).then(() => {
     return fakeDatabase.messages
   })
 );
 
-export const getChannels = () => {
-  delay(500).then(() => {
-    return fakeDatabase.channels
-  })
-};
-
 export const getUsers = () => {
   delay(500).then(() => {
-    return fakeDatabase.channels
+    return fakeDatabase.users
   })
-}
+};
 
 const testdate = new Date('August 19, 1975 23:15:30 UTC').toJSON();
 
 const fakeDatabase = {
-
   messages : {
     "1": {
       id:"1",
@@ -48,10 +47,11 @@ const fakeDatabase = {
     }
   },
   channels : {
-    "1" : {
+    "1": {
       id: "1",
-      name: "gamedev"}, 
-    "2" : {
+      name: "gamedev"
+    }, 
+    "2": {
       id: "2",
       name: "art"
     }, 
@@ -97,7 +97,8 @@ export function getInitialChannels(){
   return {
     "1" : {
       id: "1",
-      name: "gamedev"}, 
+      name: "gamedev"
+    }, 
     "2" : {
       id: "2",
       name: "art"
@@ -113,6 +114,7 @@ export function getInitialChannels(){
   }
 }
 
+/*
 export function getInitialMessages(){
   return {
     "1": {
@@ -138,23 +140,23 @@ export function getInitialMessages(){
     }
   }
 }
-
+*/
 export function getInitialUsers(){
   return { 
-      "1" : {
-          id:"1", 
-          avatar:"foo", 
-          name:"Laura"
-      },
-      "2" : {
-        id:"2", 
-        avatar:"", 
-        name: "Amy"
-      },
-      "3" : {
-        id:"3", 
-        avatar:"", 
-        name:"Hollie", 
-      }
+    "1" : {
+        id:"1", 
+        avatar:"foo", 
+        name:"Laura"
+    },
+    "2" : {
+      id:"2", 
+      avatar:"", 
+      name: "Amy"
+    },
+    "3" : {
+      id:"3", 
+      avatar:"", 
+      name:"Hollie", 
     }
+  }
 }
