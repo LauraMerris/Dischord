@@ -3,11 +3,13 @@ import { connect } from 'react-redux';
 import Channels from '../components/Channels';
 import { getChannels } from '../reducers/index';
 import { withRouter } from 'react-router-dom';
-import { fetchChannels } from '../actions/action_fetch_data'
+import { fetchChannels } from '../actions/action_fetch_data';
 
 class AvailableChannels extends Component{
     componentDidMount(){
-        this.props.fetchChannels();
+        if (this.props.channels.length === 0){
+            this.props.fetchChannels();
+        }
     }
 
     render(){

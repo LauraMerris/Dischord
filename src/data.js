@@ -14,11 +14,11 @@ export const getMessages = (channel) => (
   })
 );
 
-export const getUsers = () => {
+export const getUsers = () => (
   delay(500).then(() => {
     return fakeDatabase.users
   })
-};
+);
 
 const testdate = new Date('August 19, 1975 23:15:30 UTC').toJSON();
 
@@ -93,6 +93,7 @@ export function getUser(){
   }
 }
 
+/*
 export function getInitialChannels(){
   return {
     "1" : {
@@ -113,6 +114,7 @@ export function getInitialChannels(){
     }
   }
 }
+*/
 
 /*
 export function getInitialMessages(){
@@ -141,6 +143,7 @@ export function getInitialMessages(){
   }
 }
 */
+
 export function getInitialUsers(){
   return { 
     "1" : {
@@ -160,3 +163,4 @@ export function getInitialUsers(){
     }
   }
 }
+
