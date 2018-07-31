@@ -7,7 +7,10 @@ import { fetchChannels } from '../actions/action_fetch_data';
 
 class AvailableChannels extends Component{
     componentDidMount(){
-        if (this.props.channels.length === 0){
+        console.log('current state in AvailableChannels');
+        console.log(this.props.channels);
+        if (!this.props.channels.length){
+            console.log('no available channels found. Fetching channels.');
             this.props.fetchChannels();
         }
     }
