@@ -4,7 +4,7 @@ import rootReducer from './reducers/index';
 const wrapDispatchWithMiddlewares = (store, middlewares) => {
     middlewares.slice().reverse().forEach(middleware => (
         store.dispatch = middleware(store)(store.dispatch)
-     ))
+    ))
 }
 
 const logger = (store) => (next) => (action) => {
@@ -28,8 +28,7 @@ const promise = (store) => (next) => (action) => {
 
 const configureStore = () => {
     const store = createStore(rootReducer);
-    const middlewares = [promise];
-    middlewares.push(logger);
+    const middlewares = [promise, logger];
     wrapDispatchWithMiddlewares(store, middlewares);
     return store;
 };
