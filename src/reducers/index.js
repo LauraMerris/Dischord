@@ -40,12 +40,23 @@ const denormalizeMessages = ({users, channels}, messages) => (
         user: users[message.user],
         channel: channels[message.channel]
     }))
-)
+);
 
 export const filterMessagesByChannel = (state, channel) => {
     const filtered = fromMessages.filterMessagesByChannel(state.messages, channel);
     return denormalizeMessages(state, filtered);
 };
+
+export const getIsFetching = (state) => {
+        console.log('getting isfetching');
+        console.log('with state');
+        console.log(state);
+        const isFetching = fromMessages.getIsFetching(state.messages);
+        console.log('fetching the data with status:');
+        console.log(isFetching);
+        return isFetching;
+}
+
 
 export const getChannels = (state) => (
     fromChannels.getChannels(state.channels)

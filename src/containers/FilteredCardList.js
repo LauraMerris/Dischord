@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import CardList from '../components/CardList';
 import { deleteMessage } from '../actions/action_delete_message';
-import { fetchMessages } from '../actions/action_fetch_data';
+import { fetchMessages, requestMessages } from '../actions/action_fetch_data';
 import { filterMessagesByChannel } from '../reducers/index';
 import { withRouter } from 'react-router-dom';
+import { getIsFetching } from '../reducers/index';
 
 class FilteredCardList extends Component{
     componentDidMount(){
@@ -20,10 +21,15 @@ class FilteredCardList extends Component{
 
     getAllMessages(channel){
         // this calls action creator fetchmessages which calls the api and resolves to the receive messages action
+        this.props.requestMessages(channel);
         this.props.fetchMessages(channel);
     }
 
     render(){
+        if (this.props.isFetching && !this.props.messages.length){
+            // need a way to determine isFetching here
+            return <div>Loading ...</div>;
+        }
         return <CardList {...this.props} />;
     }
 }
@@ -33,7 +39,8 @@ const mapStateToProps = (state, {match}) => {
     return {
         messages : filterMessagesByChannel(state, filter),
         user : state.user,
-        channel : filter
+        channel : filter,
+        isFetching : getIsFetching(state)
     }
 };
 
@@ -71,4 +78,4 @@ const mapDispatchToProps = (dispatch) => ({
 
 
 
-export default withRouter(connect(mapStateToProps, {onDeleteClick : deleteMessage, fetchMessages : fetchMessages})(FilteredCardList));
+export default withRouter(connect(mapStateToProps, {onDeleteClick : deleteMessage, fetchMessages, requestMessages})(FilteredCardList));

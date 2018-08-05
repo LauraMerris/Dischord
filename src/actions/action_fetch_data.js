@@ -1,6 +1,12 @@
 import * as api from '../data';
 
 // returns an action object synchronously
+
+export const requestMessages = (channel) => ({
+    type: 'REQUEST_MESSAGES',
+    channel: channel
+});
+
 const receiveMessages = (response, channel) => ({
     type: 'RECEIVE_MESSAGES',
     payload: response,
