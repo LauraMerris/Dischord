@@ -1,25 +1,15 @@
 import { combineReducers } from 'redux';
+import byId, * as fromId from './reducer_byId';
 
-const byId = (state = {}, action) => {
-    switch(action.type){
-        case 'RECEIVE_MESSAGES':
-            return {...state, ...action.payload}
-        case 'ADD_MESSAGE':
-            return {...state, [action.payload.id]:action.payload};
-        case 'DELETE_MESSAGE':
-            // use square brackets when referring to the property as a variable
-            const { [action.payload]: deletedObject , ...newState } = state;        
-            return newState;
-        default:
-            return state;
-    }
-}
 
 const allIds = (state = [], action) => {
         switch(action.type){
             case 'RECEIVE_MESSAGES':  
-                return [...state, ...Object.keys(action.payload)];
+                const comb = [...state, ...Object.keys(action.payload)];
+                // only return non-duplicates
+                return [...new Set(comb)];
             case 'ADD_MESSAGE':
+                // should check for duplicate id here
                 return [...state, action.payload.id];
             case 'DELETE_MESSAGE':
                 return state.filter(item => item !== action.payload.id);
@@ -36,7 +26,7 @@ const messages = combineReducers({
 export default messages;
 
 const getAllMessages = (state) => (
-    state.allIds.map(id => state.byId[id])
+    state.allIds.map(id => fromId.message(state.byId, id))
 );
 
 /* selectors */

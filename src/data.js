@@ -10,7 +10,24 @@ export const getChannelsData = () => (
 
 export const getMessages = (channel) => (
   delay(500).then(() => {
-    return fakeDatabase.messages
+    const allMessages = fakeDatabase.messages;
+    
+    // getbarray of all message objects
+    // fiter to get array of ids for this channel
+    const arrMessages = Object.keys(allMessages).map(id => allMessages[id]);
+    const allowedIDs = arrMessages.filter(item => item.channel === channel).map(item => item.id);
+    
+    // get all keys
+    // filter to only keep the keys that are in the allowedIDs array
+    // reduce to an object that only includes the allowed properties
+    const filtered = Object.keys(allMessages)
+    .filter(key => allowedIDs.includes(key))
+    .reduce((obj, key) => {
+      obj[key] = allMessages[key];
+      return obj;
+    }, {});
+
+    return filtered;
   })
 );
 

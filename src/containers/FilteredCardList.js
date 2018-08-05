@@ -8,18 +8,19 @@ import { withRouter } from 'react-router-dom';
 
 class FilteredCardList extends Component{
     componentDidMount(){
-        this.getAllMessages();
+        this.getAllMessages(this.props.channel);
     }
 
     componentDidUpdate(prevProps){
         if (this.props.channel !== prevProps.channel){
             //we would fetch messages here if we wanted additional data when we changed channel
+            this.getAllMessages(this.props.channel);
         }
     }
 
-    getAllMessages(){
+    getAllMessages(channel){
         // this calls action creator fetchmessages which calls the api and resolves to the receive messages action
-        this.props.fetchMessages();
+        this.props.fetchMessages(channel);
     }
 
     render(){
@@ -70,4 +71,4 @@ const mapDispatchToProps = (dispatch) => ({
 
 
 
-export default withRouter(connect(mapStateToProps, {onDeleteClick : deleteMessage, fetchMessages})(FilteredCardList));
+export default withRouter(connect(mapStateToProps, {onDeleteClick : deleteMessage, fetchMessages : fetchMessages})(FilteredCardList));
