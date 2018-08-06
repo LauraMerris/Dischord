@@ -1,5 +1,6 @@
 import { createStore, applyMiddleware } from 'redux';
 import rootReducer from './reducers/index';
+import thunk from 'redux-thunk';
 
 const wrapDispatchWithMiddlewares = (store, middlewares) => {
     middlewares.slice().reverse().forEach(middleware => (
@@ -17,6 +18,15 @@ const logger = (store) => (next) => (action) => {
     return returnValue;
 }
 
+/*
+const thunk = (store) => (next) => (action) => {
+    if (typeof action === 'function'){
+        return action(store.dispatch)
+    }
+    return next(action);
+};
+*/
+
 const promise = (store) => (next) => (action) => {
     if (typeof action.then !== 'function'){
         return next(action)
@@ -24,11 +34,9 @@ const promise = (store) => (next) => (action) => {
     return action.then(next);
 }
 
-
-
 const configureStore = () => {
     const store = createStore(rootReducer);
-    const middlewares = [promise, logger];
+    const middlewares = [thunk, logger];
     wrapDispatchWithMiddlewares(store, middlewares);
     return store;
 };

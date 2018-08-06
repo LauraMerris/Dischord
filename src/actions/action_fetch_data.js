@@ -2,7 +2,7 @@ import * as api from '../data';
 
 // returns an action object synchronously
 
-export const requestMessages = (channel) => ({
+const requestMessages = (channel) => ({
     type: 'REQUEST_MESSAGES',
     channel: channel
 });
@@ -19,10 +19,15 @@ const receiveChannels = (response) => ({
 });
 
 // exports a promise (asynchronous) that resolves to an action creator
-export const fetchMessages = (channel) => {
-    return api.getMessages(channel).then(response => receiveMessages(response, channel))
+export const fetchMessages = (channel) => (dispatch, getState) => {
+    // do something with the state here
+    dispatch(requestMessages(channel));
+    return api.getMessages(channel).then(response => {
+        dispatch(receiveMessages(response, channel))
+    });
 };
 
-export const fetchChannels = () => {
-    return api.getChannelsData().then(response => receiveChannels(response))
+export const fetchChannels = () => (dispatch, getState) => {
+    // do something with the state here
+    return api.getChannelsData().then(response => dispatch(receiveChannels(response)))
 };

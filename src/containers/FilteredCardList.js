@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import CardList from '../components/CardList';
 import { deleteMessage } from '../actions/action_delete_message';
-import { fetchMessages, requestMessages } from '../actions/action_fetch_data';
+import { fetchMessages} from '../actions/action_fetch_data';
 import { filterMessagesByChannel } from '../reducers/index';
 import { withRouter } from 'react-router-dom';
 import { getIsFetching } from '../reducers/index';
@@ -21,8 +21,7 @@ class FilteredCardList extends Component{
 
     getAllMessages(channel){
         // this calls action creator fetchmessages which calls the api and resolves to the receive messages action
-        this.props.requestMessages(channel);
-        this.props.fetchMessages(channel);
+        this.props.fetchMessages(channel).then(console.log('fetched the messages'))
     }
 
     render(){
@@ -78,4 +77,4 @@ const mapDispatchToProps = (dispatch) => ({
 
 
 
-export default withRouter(connect(mapStateToProps, {onDeleteClick : deleteMessage, fetchMessages, requestMessages})(FilteredCardList));
+export default withRouter(connect(mapStateToProps, {onDeleteClick : deleteMessage, fetchMessages})(FilteredCardList));
