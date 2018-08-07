@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import CardList from '../components/CardList';
 import { deleteMessage } from '../actions/action_delete_message';
-import { fetchMessages} from '../actions/action_fetch_data';
+import { fetchMessages } from '../actions/action_fetch_data';
 import { filterMessagesByChannel } from '../reducers/index';
 import { withRouter } from 'react-router-dom';
-import { getIsFetching } from '../reducers/index';
+import { getIsFetching, getErrorMessage } from '../reducers/index';
+import FetchError  from '../components/FetchError';
 
 class FilteredCardList extends Component{
     componentDidMount(){
@@ -29,6 +30,13 @@ class FilteredCardList extends Component{
             // need a way to determine isFetching here
             return <div>Loading ...</div>;
         }
+        console.log('not fetching - carry on');
+        console.log(this.props.errorMessage);
+        if (this.props.errorMessage && !this.props.messages.length){
+            return (
+                <FetchError message={this.props.errorMessage} />
+            )
+        }
         return <CardList {...this.props} />;
     }
 }
@@ -37,6 +45,7 @@ const mapStateToProps = (state, {match}) => {
     const filter = match.params.channel;    
     return {
         messages : filterMessagesByChannel(state, filter),
+        errorMessage : getErrorMessage(state, filter),
         user : state.user,
         channel : filter,
         isFetching : getIsFetching(state)

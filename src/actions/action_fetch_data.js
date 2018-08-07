@@ -21,9 +21,23 @@ const receiveChannels = (response) => ({
 // exports a promise (asynchronous) that resolves to an action creator
 export const fetchMessages = (channel) => (dispatch, getState) => {
     // do something with the state here
-    dispatch(requestMessages(channel));
+    dispatch({
+        type: 'REQUEST_MESSAGES',
+        channel: channel
+    });
+
     return api.getMessages(channel).then(response => {
-        dispatch(receiveMessages(response, channel))
+        dispatch({
+            type: 'RECEIVE_MESSAGES',
+            payload: response,
+            channel: channel 
+        });
+    }, error => {
+        dispatch({
+            type: 'FETCH_MESSAGES_FAILURE',
+            message: error.message || 'Something went wrong.',
+            channel
+        });
     });
 };
 

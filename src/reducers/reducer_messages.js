@@ -29,4 +29,8 @@ export const getIsFetching = (state) => {
     return fromAllIds.getIsFetching(state.allIds);
 }
 
+export const getErrorMessage = (state) => {
+    return fromAllIds.getErrorMessage(state.allIds);
+}
+
 

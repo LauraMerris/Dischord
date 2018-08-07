@@ -10,9 +10,12 @@ export const getChannelsData = () => (
 
 export const getMessages = (channel) => (
   delay(500).then(() => {
+    if (Math.random() > 0.5){
+      throw new Error("OMG an error - panic");
+    }
     const allMessages = fakeDatabase.messages;
-    
-    // getbarray of all message objects
+
+    // getarray of all message objects
     // fiter to get array of ids for this channel
     const arrMessages = Object.keys(allMessages).map(id => allMessages[id]);
     const allowedIDs = arrMessages.filter(item => item.channel === channel).map(item => item.id);

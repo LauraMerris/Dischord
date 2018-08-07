@@ -48,14 +48,13 @@ export const filterMessagesByChannel = (state, channel) => {
 };
 
 export const getIsFetching = (state) => {
-        console.log('getting isfetching');
-        console.log('with state');
-        console.log(state);
         const isFetching = fromMessages.getIsFetching(state.messages);
-        console.log('fetching the data with status:');
-        console.log(isFetching);
         return isFetching;
-}
+};
+
+export const getErrorMessage = (state) => (
+    fromMessages.getErrorMessage(state.messages)
+);
 
 
 export const getChannels = (state) => (
