@@ -18,7 +18,7 @@ const receiveChannels = (response) => ({
     payload: response
 });
 
-// exports a promise (asynchronous) that resolves to an action creator
+// returns a function that exports a promise (asynchronous) that resolves to an action creator
 export const fetchMessages = (channel) => (dispatch, getState) => {
     // do something with the state here
     dispatch({

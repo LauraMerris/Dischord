@@ -10,7 +10,7 @@ const ids = (state = [], action) => {
             // should check for duplicate id here
             return [...state, action.payload.id];
         case 'DELETE_MESSAGE':
-            return state.filter(item => item !== action.payload.id);
+            return state.filter(item => item !== action.payload);
         default:
             return state;
     }
