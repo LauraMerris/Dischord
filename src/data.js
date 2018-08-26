@@ -2,6 +2,20 @@ const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 // simulates REST API calls
 
+export const addMessage = (message, channel) => (
+  delay(500).then(() => {
+    let date = new Date().toJSON();
+    
+    return {
+        id: "4",
+        user: "1", 
+        message: message, 
+        created: date,
+        channel:channel
+    }
+  })
+);
+
 export const getChannelsData = () => (
   delay(500).then(() => {
     return fakeDatabase.channels

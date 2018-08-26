@@ -35,7 +35,7 @@ const mapStateToProps = (state, { match }) => {
 const mapDispatchToProps = (dispatch, { match }) => ({
     fetchChannels,
     addMessage(text){
-        dispatch(addMessage(text.trim(), new Date().toJSON(), match.params.channel))
+        dispatch(addMessage(text.trim(), match.params.channel))
     }
 });
 
